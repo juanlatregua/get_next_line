@@ -6,14 +6,11 @@
 /*   By: jsilva-m <jsilva-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 18:48:10 by jsilva-m          #+#    #+#             */
-/*   Updated: 2024/03/15 18:55:28 by jsilva-m         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:29:49 by jsilva-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include    "get_next_line_bonus.h"
-
-//	fills 'n' bytes of a memory area 's'
-//	with null characters.
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -26,18 +23,6 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		*((unsigned char *)s + i) = '\0';
-		i++;
-	}
-}
-
-//	Calculates the lenght of a string 'str'
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
@@ -49,11 +34,6 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-
-//	Function that searches for a character 'c'
-//	in a string 's' and returns a pointer to
-//	that character
-
 char	*ft_strchr(const char *s, int c)
 {
 	if (s == NULL)
@@ -68,11 +48,6 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s);
 	return (NULL);
 }
-
-//    Function that duplicates a string 's'
-//    const char *s is the string to be duplicated
-//    returns a pointer to a new string which is a duplicate of the string 's'
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;

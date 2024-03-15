@@ -6,15 +6,15 @@
 /*   By: jsilva-m <jsilva-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 18:47:44 by jsilva-m          #+#    #+#             */
-/*   Updated: 2024/03/15 18:55:24 by jsilva-m         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:08:21 by jsilva-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-//	function that reads the file,
-//	stores the str in the buffer and joins it to the stash
-
+/*function that reads the file,
+stores the str in the buffer and joins it to the stash
+*/
 static int	read_buffer(int fd, char **stash, char *buffer)
 {
 	char	*tmp;
@@ -36,8 +36,8 @@ static int	read_buffer(int fd, char **stash, char *buffer)
 	return (bytes);
 }
 
-//	Removes the string obtained in get_result()
-//	from the stash.
+/*Removes the string obtained in get_result()
+	from the stash.*/
 
 static void	remove_result(char **stash)
 {
@@ -68,7 +68,7 @@ static void	remove_result(char **stash)
 	}
 }
 
-//	Takes the string to return from the stash
+/*Takes the string to return from the stash*/
 
 static void	get_result(char **stash, char **result)
 {
@@ -90,10 +90,10 @@ static void	get_result(char **stash, char **result)
 	(*result)[i] = '\0';
 }
 
-//	 This time we needed to use a char pointer array
+/*This time we needed to use a char pointer array
 //	 to store the progress of read() in multiple files
 //	 MAX_FILES_OPENED is the locked-in-memory size
-//	 obtained through the command "ulimit -a"
+//	 obtained through the command "ulimit -a"*/
 
 char	*get_next_line(int fd)
 {

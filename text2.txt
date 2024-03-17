@@ -1,0 +1,1004 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset77 ZapfDingbatsITC;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww17980\viewh17300\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 juanlatregua: por que me sale error #ifndef GET_NEXT_LINE_H\
+# define GET_NEXT_LINE_H\
+\
+GitHub Copilot: El c\'f3digo que has proporcionado es una directiva de preprocesador en C++ que se utiliza para evitar la doble inclusi\'f3n de un archivo de encabezado. Si est\'e1s obteniendo un error, podr\'eda ser debido a varias razones. Aqu\'ed hay algunas posibles causas:\
+\
+1. El archivo de encabezado "get_next_line.h" no se encuentra en el directorio actual o en los directorios de inclusi\'f3n especificados.\
+2. Hay un error en el c\'f3digo que sigue a estas directivas de preprocesador.\
+3. Est\'e1s intentando compilar el c\'f3digo con un compilador que no es compatible con estas directivas de preprocesador.\
+\
+Para poder ayudarte de manera m\'e1s efectiva, necesitar\'eda m\'e1s detalles sobre el error que est\'e1s obteniendo. Por favor, proporciona el mensaje de error completo o cualquier otro detalle relevante.\
+\
+juanlatregua: char	*get_next_line(int fd);\
+\
+void	ft_bzero(void *s, size_t n);\
+size_t	ft_strlen(const char *str);\
+char	*ft_strchr(const char *s, int c);\
+char	*ft_strjoin(char const *s1, char const *s2); puedes explicar cada una de las funciones y las variables \
+\
+GitHub Copilot: Claro, aqu\'ed tienes una explicaci\'f3n de cada una de las funciones y sus par\'e1metros:\
+\
+1. `char *get_next_line(int fd);`\
+   Esta funci\'f3n lee una l\'ednea desde un descriptor de archivo. Devuelve la l\'ednea le\'edda como una cadena de caracteres. `fd` es el descriptor de archivo del que se va a leer.\
+\
+2. `void ft_bzero(void *s, size_t n);`\
+   Esta funci\'f3n establece los primeros `n` bytes del \'e1rea apuntada por `s` a cero (bytes '\\0'). `s` es un puntero al \'e1rea de memoria que se va a establecer a cero, y `n` es el n\'famero de bytes a establecer a cero.\
+\
+3. `size_t ft_strlen(const char *str);`\
+   Esta funci\'f3n calcula la longitud de la cadena de caracteres `str`, sin incluir el car\'e1cter nulo final. Devuelve el n\'famero de caracteres que preceden al car\'e1cter nulo.\
+\
+4. `char *ft_strchr(const char *s, int c);`\
+   Esta funci\'f3n localiza la primera ocurrencia del car\'e1cter `c` (convertido a un char) en la cadena apuntada por `s`. La terminaci\'f3n nula tambi\'e9n se considera parte de la cadena. Si `c` se encuentra, la funci\'f3n devuelve un puntero a la ubicaci\'f3n. Si no se encuentra, devuelve NULL.\
+\
+5. `char *ft_strjoin(char const *s1, char const *s2);`\
+   Esta funci\'f3n concatena las cadenas `s1` y `s2` en una nueva cadena. Devuelve un puntero a la nueva cadena, o NULL si la operaci\'f3n falla.\
+\
+juanlatregua: Error in test 8: get_next_line(5: "lines_around_10.txt"):\
+malloc protection check for 1th malloc:\
+0   test3.out                           0x000000010c04e755 _add_malloc + 757\
+1   test3.out                           0x000000010c04e453 malloc + 307\
+2   test3.out                           0x000000010c054c20 get_next_line + 256\
+3   test3.out                           0x000000010c054822 null_check_gnl + 50\
+4   test3.out                           0x000000010c04c16a main + 13754\
+5   libdyld.dylib                       0x00007fff69a7ecc9 start + 1\
+6   ???                                 0x0000000000000001 0x0 + 1\
+: Segmentation fault!\
+0   test3.out                           0x000000010c050f83 show_signal_msg + 419\
+1   test3.out                           0x000000010c051021 sigsegv + 33\
+2   libsystem_platform.dylib            0x00007fff69c775fd _sigtramp + 29\
+3   ???                                 0x0000000000000000 0x0 + 0\
+4   test3.out                           0x000000010c054dd1 read_buffer + 33\
+5   test3.out                           0x000000010c054c78 get_next_line + 344\
+6   test3.out                           0x000000010c054a0e null_check_gnl + 542\
+7   test3.out                           0x000000010c04c16a main + 13754\
+8   libdyld.dylib                       0x00007fff69a7ecc9 start + 1\
+9   ???                                 0x0000000000000001 0x0 + 1\
+\
+GitHub Copilot: El error de "Segmentation fault" generalmente ocurre cuando tu programa intenta acceder a una memoria que no le pertenece. En tu caso, parece que el error ocurre en la funci\'f3n `get_next_line` y en la funci\'f3n `read_buffer`.\
+\
+Aqu\'ed hay algunas posibles causas y soluciones:\
+\
+1. **Acceso a memoria no asignada**: Aseg\'farate de que est\'e1s asignando memoria antes de intentar acceder a ella. Por ejemplo, si est\'e1s utilizando un puntero, aseg\'farate de que has llamado a `malloc` o `calloc` para asignar memoria antes de usarlo.\
+\
+2. **Desbordamiento de buffer**: Si est\'e1s leyendo de un archivo, aseg\'farate de no leer m\'e1s datos de los que tu buffer puede contener.\
+\
+3. **Liberaci\'f3n de memoria ya liberada**: Si est\'e1s liberando memoria con `free`, aseg\'farate de no liberar la misma memoria dos veces.\
+\
+4. **Acceso a memoria despu\'e9s de liberarla**: Si has liberado memoria con `free`, aseg\'farate de no intentar acceder a ella despu\'e9s de liberarla.\
+\
+Para solucionar el problema, te recomendar\'eda que revises tu c\'f3digo y busques estos posibles problemas. Tambi\'e9n puedes usar herramientas como Valgrind para ayudarte a encontrar y solucionar problemas de memoria.\
+\
+juanlatregua: char	*get_next_line(int fd)\
+\{\
+	static char	*stash;\
+	char		*result;\
+	char		*buffer;\
+	int			bytes;\
+\
+	if (fd < 0 || BUFFER_SIZE <= 0)\
+		return (NULL);\
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));\
+	bytes = 1;\
+	while (ft_strchr(stash, '\\n') == NULL\
+		&& bytes > 0)\
+		bytes = read_buffer(fd, &stash, buffer);\
+	free(buffer);\
+	if (bytes == -1)\
+		return (NULL);\
+	if (ft_strlen(stash) == 0)\
+		return (NULL);\
+	get_result(&stash, &result);\
+	remove_result(&stash);\
+	return (result);\
+\}\
+\
+GitHub Copilot: Esta funci\'f3n `get_next_line` se utiliza para leer una l\'ednea de un archivo a la vez. Aqu\'ed est\'e1 la explicaci\'f3n de c\'f3mo funciona:\
+\
+1. `static char *stash;` - `stash` es una variable est\'e1tica que se utiliza para almacenar cualquier dato que se haya le\'eddo pero que a\'fan no se haya devuelto.\
+\
+2. `char *result;` - `result` es un puntero a la l\'ednea que se va a devolver.\
+\
+3. `char *buffer;` - `buffer` es un puntero a un bloque de memoria que se utiliza para leer datos del archivo.\
+\
+4. `int bytes;` - `bytes` es una variable que almacena el n\'famero de bytes le\'eddos en la \'faltima operaci\'f3n de lectura.\
+\
+5. `if (fd < 0 || BUFFER_SIZE <= 0) return (NULL);` - Si el descriptor de archivo es inv\'e1lido o si el tama\'f1o del buffer es 0 o negativo, la funci\'f3n devuelve NULL.\
+\
+6. `buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));` - Se asigna memoria para el buffer.\
+\
+7. `while (ft_strchr(stash, '\\n') == NULL && bytes > 0)` - Mientras no se encuentre un car\'e1cter de nueva l\'ednea en `stash` y la \'faltima operaci\'f3n de lectura haya le\'eddo al menos un byte, se sigue leyendo del archivo.\
+\
+8. `bytes = read_buffer(fd, &stash, buffer);` - Se lee del archivo y se almacena el resultado en `stash`.\
+\
+9. `free(buffer);` - Se libera la memoria asignada a `buffer`.\
+\
+10. `if (bytes == -1) return (NULL);` - Si la \'faltima operaci\'f3n de lectura devolvi\'f3 un error, la funci\'f3n devuelve NULL.\
+\
+11. `if (ft_strlen(stash) == 0) return (NULL);` - Si `stash` est\'e1 vac\'edo, la funci\'f3n devuelve NULL.\
+\
+12. `get_result(&stash, &result);` - Se extrae la l\'ednea de `stash` y se almacena en `result`.\
+\
+13. `remove_result(&stash);` - Se elimina la l\'ednea de `stash` que se acaba de devolver.\
+\
+14. `return (result);` - Se devuelve la l\'ednea le\'edda.\
+\
+juanlatregua: puedes ayudarme con el error  Error in test 8: get_next_line(5: "lines_around_10.txt"):\
+malloc protection check for 1th malloc:\
+0   test3.out                           0x000000010c04e755 _add_malloc + 757\
+1   test3.out                           0x000000010c04e453 malloc + 307\
+2   test3.out                           0x000000010c054c20 get_next_line + 256\
+3   test3.out                           0x000000010c054822 null_check_gnl + 50\
+4   test3.out                           0x000000010c04c16a main + 13754\
+5   libdyld.dylib                       0x00007fff69a7ecc9 start + 1\
+6   ???                                 0x0000000000000001 0x0 + 1\
+: Segmentation fault!\
+0   test3.out                           0x000000010c050f83 show_signal_msg + 419\
+1   test3.out                           0x000000010c051021 sigsegv + 33\
+2   libsystem_platform.dylib            0x00007fff69c775fd _sigtramp + 29\
+3   ???                                 0x0000000000000000 0x0 + 0\
+4   test3.out                           0x000000010c054dd1 read_buffer + 33\
+5   test3.out                           0x000000010c054c78 get_next_line + 344\
+6   test3.out                           0x000000010c054a0e null_check_gnl + 542\
+7   test3.out                           0x000000010c04c16a main + 13754\
+8   libdyld.dylib                       0x00007fff69a7ecc9 start + 1\
+9   ???                                 0x0000000000000001 0x0 + 1\
+\
+GitHub Copilot: El error de "Segmentation fault" que est\'e1s experimentando indica que tu programa est\'e1 intentando acceder a una memoria que no le pertenece. En tu caso, parece que el error ocurre en la funci\'f3n `get_next_line` y en la funci\'f3n `read_buffer`.\
+\
+El problema podr\'eda estar en la funci\'f3n `read_buffer`, que no se muestra en el c\'f3digo que proporcionaste. Sin embargo, hay un par de cosas que podr\'edas verificar en la funci\'f3n `get_next_line`:\
+\
+1. **Verifica la asignaci\'f3n de memoria para `buffer`**: Aseg\'farate de que la memoria se asigna correctamente para `buffer`. Si `malloc` falla, devuelve NULL y cualquier intento de acceder a la memoria a trav\'e9s de `buffer` resultar\'e1 en un error de segmentaci\'f3n.\
+\
+```c\
+buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));\
+if (!buffer)\
+    return (NULL);\
+```\
+\
+2. **Verifica el uso de `stash`**: `stash` es una variable est\'e1tica y se inicializa a NULL. Si intentas acceder a `stash` (por ejemplo, con `ft_strchr(stash, '\\n')`) antes de asignarle alg\'fan valor v\'e1lido, obtendr\'e1s un error de segmentaci\'f3n. Aseg\'farate de que `stash` se inicializa correctamente antes de usarlo.\
+\
+3. **Verifica la funci\'f3n `read_buffer`**: Como mencion\'e9 antes, el error tambi\'e9n parece estar en la funci\'f3n `read_buffer`. Aseg\'farate de que esta funci\'f3n maneja correctamente la memoria y los errores.\
+\
+Si despu\'e9s de revisar estos puntos el error persiste, te recomendar\'eda que uses una herramienta de depuraci\'f3n como gdb o lldb, o una herramienta de an\'e1lisis de memoria como Valgrind, para obtener m\'e1s informaci\'f3n sobre d\'f3nde y por qu\'e9 se produce el error.\
+\
+juanlatregua: aqu\'ed tienes Error in test 8: get_next_line(5: "lines_around_10.txt"):\
+malloc protection check for 1th malloc:\
+0   test3.out                           0x000000010c04e755 _add_malloc + 757\
+1   test3.out                           0x000000010c04e453 malloc + 307\
+2   test3.out                           0x000000010c054c20 get_next_line + 256\
+3   test3.out                           0x000000010c054822 null_check_gnl + 50\
+4   test3.out                           0x000000010c04c16a main + 13754\
+5   libdyld.dylib                       0x00007fff69a7ecc9 start + 1\
+6   ???                                 0x0000000000000001 0x0 + 1\
+: Segmentation fault!\
+0   test3.out                           0x000000010c050f83 show_signal_msg + 419\
+1   test3.out                           0x000000010c051021 sigsegv + 33\
+2   libsystem_platform.dylib            0x00007fff69c775fd _sigtramp + 29\
+3   ???                                 0x0000000000000000 0x0 + 0\
+4   test3.out                           0x000000010c054dd1 read_buffer + 33\
+5   test3.out                           0x000000010c054c78 get_next_line + 344\
+6   test3.out                           0x000000010c054a0e null_check_gnl + 542\
+7   test3.out                           0x000000010c04c16a main + 13754\
+8   libdyld.dylib                       0x00007fff69a7ecc9 start + 1\
+9   ???                                 0x0000000000000001 0x0 + 1\
+\
+GitHub Copilot: El error de "Segmentation fault" que est\'e1s experimentando indica que tu programa est\'e1 intentando acceder a una memoria que no le pertenece. En tu caso, parece que el error ocurre en la funci\'f3n `get_next_line` y en la funci\'f3n `read_buffer`.\
+\
+El problema podr\'eda estar en la funci\'f3n `read_buffer`, que no se muestra en el c\'f3digo que proporcionaste. Sin embargo, hay un par de cosas que podr\'edas verificar en la funci\'f3n `get_next_line`:\
+\
+1. **Verifica la asignaci\'f3n de memoria para `buffer`**: Aseg\'farate de que la memoria se asigna correctamente para `buffer`. Si `malloc` falla, devuelve NULL y cualquier intento de acceder a la memoria a trav\'e9s de `buffer` resultar\'e1 en un error de segmentaci\'f3n.\
+\
+```c\
+buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));\
+if (!buffer)\
+    return (NULL);\
+```\
+\
+2. **Verifica el uso de `stash`**: `stash` es una variable est\'e1tica y se inicializa a NULL. Si intentas acceder a `stash` (por ejemplo, con `ft_strchr(stash, '\\n')`) antes de asignarle alg\'fan valor v\'e1lido, obtendr\'e1s un error de segmentaci\'f3n. Aseg\'farate de que `stash` se inicializa correctamente antes de usarlo.\
+\
+3. **Verifica la funci\'f3n `read_buffer`**: Como mencion\'e9 antes, el error tambi\'e9n parece estar en la funci\'f3n `read_buffer`. Aseg\'farate de que esta funci\'f3n maneja correctamente la memoria y los errores.\
+\
+Si despu\'e9s de revisar estos puntos el error persiste, te recomendar\'eda que uses una herramienta de depuraci\'f3n como gdb o lldb, o una herramienta de an\'e1lisis de memoria como Valgrind, para obtener m\'e1s informaci\'f3n sobre d\'f3nde y por qu\'e9 se produce el error.\
+\
+juanlatregua: static int	read_buffer(int fd, char **stash, char *buffer)\
+\{\
+	char	*tmp;\
+	int		bytes;\
+\
+	ft_bzero(buffer, BUFFER_SIZE + 1);\
+	bytes = read(fd, buffer, BUFFER_SIZE);\
+	if (bytes < 0 || buffer == NULL)\
+	\{\
+		free(*stash);\
+		*stash = NULL;\
+		return (-1);\
+	\}\
+	if (bytes == 0)\
+		return (bytes);\
+	tmp = ft_strjoin(*stash, buffer);\
+	free(*stash);\
+	*stash = tmp;\
+	return (bytes);\
+\}\
+\
+GitHub Copilot: La funci\'f3n `read_buffer` se utiliza para leer datos del archivo y agregarlos a `stash`. Aqu\'ed est\'e1 la explicaci\'f3n de c\'f3mo funciona:\
+\
+1. `ft_bzero(buffer, BUFFER_SIZE + 1);` - Esta l\'ednea borra los datos en `buffer`, estableciendo todos los bytes a cero.\
+\
+2. `bytes = read(fd, buffer, BUFFER_SIZE);` - Esta l\'ednea lee hasta `BUFFER_SIZE` bytes del archivo en `buffer`.\
+\
+3. `if (bytes < 0 || buffer == NULL)` - Esta l\'ednea comprueba si ocurri\'f3 un error durante la lectura del archivo o si `buffer` es NULL. Si alguna de estas condiciones es verdadera, libera la memoria asignada a `stash`, establece `stash` a NULL y devuelve -1.\
+\
+4. `if (bytes == 0) return (bytes);` - Si no se leyeron bytes del archivo (es decir, si se ha llegado al final del archivo), la funci\'f3n devuelve 0.\
+\
+5. `tmp = ft_strjoin(*stash, buffer);` - Esta l\'ednea concatena `buffer` al final de `stash`.\
+\
+6. `free(*stash);` - Esta l\'ednea libera la memoria previamente asignada a `stash`.\
+\
+7. `*stash = tmp;` - Esta l\'ednea hace que `stash` apunte a la nueva cadena concatenada.\
+\
+8. `return (bytes);` - Finalmente, la funci\'f3n devuelve el n\'famero de bytes le\'eddos del archivo.\
+\
+Una posible causa de un error de segmentaci\'f3n en esta funci\'f3n podr\'eda ser si `ft_strjoin` no est\'e1 manejando correctamente la memoria. Por ejemplo, si `ft_strjoin` devuelve NULL pero no libera la memoria asignada a las cadenas de entrada, entonces la l\'ednea `free(*stash);` podr\'eda estar intentando liberar memoria que ya ha sido liberada, lo que resultar\'eda en un error de segmentaci\'f3n. Te recomendar\'eda que revises la implementaci\'f3n de `ft_strjoin` para asegurarte de que est\'e1 manejando correctamente la memoria.\
+\
+juanlatregua: char	*ft_strjoin(char const *s1, char const *s2)\
+\{\
+	char	*str;\
+	size_t	len;\
+	size_t	i;\
+\
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;\
+	str = (char *)malloc(len * sizeof(char));\
+	if (!str)\
+		return (NULL);\
+	i = 0;\
+	while (s1 && *s1)\
+	\{\
+		str[i++] = *s1;\
+		s1++;\
+	\}\
+	while (s2 && *s2)\
+	\{\
+		str[i++] = *s2;\
+		s2++;\
+	\}\
+	str[i] = '\\0';\
+	return (str);\
+\}\
+\
+\
+GitHub Copilot: La funci\'f3n `ft_strjoin` que proporcionaste concatena dos cadenas `s1` y `s2`. Aqu\'ed est\'e1 la explicaci\'f3n de c\'f3mo funciona:\
+\
+1. `len = ft_strlen(s1) + ft_strlen(s2) + 1;` - Esta l\'ednea calcula la longitud total de la nueva cadena, que es la suma de las longitudes de `s1` y `s2`, m\'e1s uno para el car\'e1cter nulo al final.\
+\
+2. `str = (char *)malloc(len * sizeof(char));` - Esta l\'ednea asigna memoria para la nueva cadena.\
+\
+3. `if (!str) return (NULL);` - Esta l\'ednea comprueba si la asignaci\'f3n de memoria fue exitosa. Si no lo fue (es decir, si `malloc` devolvi\'f3 NULL), la funci\'f3n devuelve NULL.\
+\
+4. `while (s1 && *s1)` y `while (s2 && *s2)` - Estos dos bucles copian los caracteres de `s1` y `s2` a la nueva cadena `str`.\
+\
+5. `str[i] = '\\0';` - Esta l\'ednea a\'f1ade el car\'e1cter nulo al final de la nueva cadena.\
+\
+6. `return (str);` - Finalmente, la funci\'f3n devuelve la nueva cadena.\
+\
+Si est\'e1s experimentando un error de segmentaci\'f3n, podr\'eda ser debido a que `s1` o `s2` son NULL. En tu funci\'f3n `read_buffer`, pasas `*stash` y `buffer` a `ft_strjoin`. Si `*stash` es NULL (lo que podr\'eda ser el caso la primera vez que llamas a `read_buffer`), entonces `ft_strlen(s1)` en `ft_strjoin` podr\'eda estar causando un error de segmentaci\'f3n.\
+\
+Para solucionar este problema, podr\'edas modificar `ft_strjoin` para que maneje correctamente las cadenas NULL. Aqu\'ed hay una posible soluci\'f3n:\
+\
+```c\
+size_t	ft_strlen_safe(char const *s)\
+\{\
+	if (s == NULL)\
+		return (0);\
+	return (ft_strlen(s));\
+\}\
+\
+char	*ft_strjoin(char const *s1, char const *s2)\
+\{\
+	char	*str;\
+	size_t	len;\
+	size_t	i;\
+\
+	len = ft_strlen_safe(s1) + ft_strlen_safe(s2) + 1;\
+	str = (char *)malloc(len * sizeof(char));\
+	if (!str)\
+		return (NULL);\
+	i = 0;\
+	while (s1 && *s1)\
+	\{\
+		str[i++] = *s1;\
+		s1++;\
+	\}\
+	while (s2 && *s2)\
+	\{\
+		str[i++] = *s2;\
+		s2++;\
+	\}\
+	str[i] = '\\0';\
+	return (str);\
+\}\
+```\
+\
+En esta versi\'f3n, `ft_strlen_safe` devuelve 0 si la cadena es NULL, lo que evita el error de segmentaci\'f3n.\
+\
+juanlatregua: que hago con mi funci\'f3n size_t	ft_strlen(const char *str)\
+\{\
+	size_t	i;\
+\
+	if (str == NULL)\
+		return (0);\
+	i = 0;\
+	while (str[i] != '\\0')\
+		i++;\
+	return (i);\
+\}\
+\
+GitHub Copilot: Tu funci\'f3n `ft_strlen` ya maneja correctamente las cadenas NULL, devolviendo 0 si `str` es NULL. Por lo tanto, no necesitas hacer ning\'fan cambio en esta funci\'f3n.\
+\
+Si todav\'eda est\'e1s experimentando un error de segmentaci\'f3n, el problema debe estar en otra parte de tu c\'f3digo. Te recomendar\'eda que revises todas las funciones que manejan la memoria (como `malloc`, `free`, etc.) para asegurarte de que est\'e1s asignando y liberando la memoria correctamente. Tambi\'e9n podr\'edas usar una herramienta de depuraci\'f3n para obtener m\'e1s informaci\'f3n sobre d\'f3nde se produce el error.\
+\
+juanlatregua: como se asigna y libera correctamente la memoria\
+\
+GitHub Copilot: En C, la asignaci\'f3n y liberaci\'f3n de memoria se realiza a trav\'e9s de las funciones `malloc` y `free`.\
+\
+**Asignaci\'f3n de memoria:**\
+\
+La funci\'f3n `malloc` se utiliza para asignar un bloque de memoria en el heap. La funci\'f3n toma un solo argumento, que es el tama\'f1o del bloque de memoria que se desea asignar. `malloc` devuelve un puntero al bloque de memoria asignado.\
+\
+```c\
+int *ptr = (int *)malloc(sizeof(int) * 10); // Asigna memoria para un array de 10 enteros\
+```\
+\
+Es importante comprobar si `malloc` ha tenido \'e9xito en la asignaci\'f3n de memoria. Si `malloc` no puede asignar la memoria solicitada, devuelve NULL.\
+\
+```c\
+if (ptr == NULL) \{\
+    // Manejo del error\
+\}\
+```\
+\
+**Liberaci\'f3n de memoria:**\
+\
+La funci\'f3n `free` se utiliza para liberar un bloque de memoria que ha sido asignado previamente con `malloc`. `free` toma un solo argumento, que es un puntero al bloque de memoria que se desea liberar.\
+\
+```c\
+free(ptr); // Libera la memoria asignada a ptr\
+```\
+\
+Despu\'e9s de llamar a `free`, el puntero todav\'eda existe, pero apunta a un bloque de memoria que ha sido liberado, por lo que no debe ser utilizado. Es una buena pr\'e1ctica establecer el puntero a NULL despu\'e9s de liberar la memoria para evitar errores.\
+\
+```c\
+ptr = NULL; // Establece ptr a NULL despu\'e9s de liberar la memoria\
+```\
+\
+Es importante recordar que cada llamada a `malloc` debe tener una correspondiente llamada a `free`. Si no se libera la memoria asignada, puede producirse una fuga de memoria, que es cuando una aplicaci\'f3n consume memoria pero no la libera cuando ya no la necesita.\
+\
+juanlatregua: en esta funci\'f3n no lo hace correctamente ? char	*ft_strjoin(char const *s1, char const *s2)\
+\{\
+	char	*str;\
+	size_t	len;\
+	size_t	i;\
+\
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;\
+	str = (char *)malloc(len * sizeof(char));\
+	if (!str)\
+		return (NULL);\
+	i = 0;\
+	while (s1 && *s1)\
+	\{\
+		str[i++] = *s1;\
+		s1++;\
+	\}\
+	while (s2 && *s2)\
+	\{\
+		str[i++] = *s2;\
+		s2++;\
+	\}\
+	str[i] = '\\0';\
+	return (str);\
+\}\
+\
+GitHub Copilot: La funci\'f3n `ft_strjoin` que proporcionaste parece manejar correctamente la asignaci\'f3n de memoria. Aqu\'ed est\'e1n los puntos relevantes:\
+\
+1. `str = (char *)malloc(len * sizeof(char));` - Esta l\'ednea asigna memoria para la nueva cadena. El tama\'f1o de la memoria asignada es la suma de las longitudes de `s1` y `s2`, m\'e1s uno para el car\'e1cter nulo al final.\
+\
+2. `if (!str) return (NULL);` - Esta l\'ednea comprueba si la asignaci\'f3n de memoria fue exitosa. Si `malloc` no pudo asignar la memoria solicitada, devuelve NULL.\
+\
+3. `return (str);` - Al final de la funci\'f3n, devuelve el puntero a la nueva cadena. Esta cadena debe ser liberada en alg\'fan momento por el c\'f3digo que llama a `ft_strjoin` para evitar fugas de memoria.\
+\
+Por lo tanto, la asignaci\'f3n de memoria en `ft_strjoin` parece estar bien. Sin embargo, es importante recordar que la memoria asignada en `ft_strjoin` debe ser liberada en alg\'fan momento. Si la funci\'f3n que llama a `ft_strjoin` no libera esta memoria, podr\'eda producirse una fuga de memoria.\
+\
+juanlatregua: aqu\'ed \
+static int	read_buffer(int fd, char **stash, char *buffer)\
+\{\
+	char	*tmp;\
+	int		bytes;\
+\
+	ft_bzero(buffer, BUFFER_SIZE + 1);\
+	bytes = read(fd, buffer, BUFFER_SIZE);\
+	if (bytes < 0 || buffer == NULL)\
+	\{\
+		free(*stash);\
+		*stash = NULL;\
+		return (-1);\
+	\}\
+	if (bytes == 0)\
+		return (bytes);\
+	tmp = ft_strjoin(*stash, buffer);\
+	free(*stash);\
+	*stash = tmp;\
+	return (bytes);\
+\}\
+\
+GitHub Copilot: En la funci\'f3n `read_buffer` que proporcionaste, la memoria se maneja correctamente en la mayor\'eda de los casos. Aqu\'ed est\'e1n los puntos relevantes:\
+\
+1. `ft_bzero(buffer, BUFFER_SIZE + 1);` - Esta l\'ednea borra los datos en `buffer`, estableciendo todos los bytes a cero.\
+\
+2. `bytes = read(fd, buffer, BUFFER_SIZE);` - Esta l\'ednea lee hasta `BUFFER_SIZE` bytes del archivo en `buffer`.\
+\
+3. `if (bytes < 0 || buffer == NULL)` - Esta l\'ednea comprueba si ocurri\'f3 un error durante la lectura del archivo o si `buffer` es NULL. Si alguna de estas condiciones es verdadera, libera la memoria asignada a `stash`, establece `stash` a NULL y devuelve -1.\
+\
+4. `tmp = ft_strjoin(*stash, buffer);` - Esta l\'ednea concatena `buffer` al final de `stash`. La memoria para la nueva cadena se asigna en `ft_strjoin`.\
+\
+5. `free(*stash);` - Esta l\'ednea libera la memoria previamente asignada a `stash`.\
+\
+6. `*stash = tmp;` - Esta l\'ednea hace que `stash` apunte a la nueva cadena concatenada.\
+\
+Por lo tanto, la asignaci\'f3n y liberaci\'f3n de memoria en `read_buffer` parece estar bien. Sin embargo, es importante recordar que la memoria asignada en `read_buffer` (espec\'edficamente, la memoria asignada en `ft_strjoin`) debe ser liberada en alg\'fan momento. Si la funci\'f3n que llama a `read_buffer` no libera esta memoria, podr\'eda producirse una fuga de memoria.\
+\
+juanlatregua: pero tiene que funcionar siempre\
+\
+GitHub Copilot: La funci\'f3n `read_buffer` que proporcionaste deber\'eda funcionar correctamente en la mayor\'eda de los casos. Sin embargo, hay algunas situaciones en las que podr\'eda fallar:\
+\
+1. Si `read` falla por alguna raz\'f3n (por ejemplo, si `fd` no es un descriptor de archivo v\'e1lido), `read_buffer` liberar\'e1 `stash` y devolver\'e1 -1. Esto es un comportamiento esperado.\
+\
+2. Si `buffer` es NULL, `read_buffer` tambi\'e9n liberar\'e1 `stash` y devolver\'e1 -1. Esto tambi\'e9n es un comportamiento esperado.\
+\
+3. Si `ft_strjoin` falla al asignar memoria para la nueva cadena, devolver\'e1 NULL. En este caso, `read_buffer` liberar\'e1 `stash`, pero luego har\'e1 que `stash` apunte a NULL. Esto podr\'eda no ser el comportamiento esperado, ya que `read_buffer` devolver\'e1 el n\'famero de bytes le\'eddos en lugar de -1.\
+\
+Para manejar este \'faltimo caso, podr\'edas modificar `read_buffer` para comprobar si `ft_strjoin` ha tenido \'e9xito:\
+\
+```c\
+tmp = ft_strjoin(*stash, buffer);\
+if (tmp == NULL)\
+\{\
+    free(*stash);\
+    *stash = NULL;\
+    return (-1);\
+\}\
+free(*stash);\
+*stash = tmp;\
+```\
+\
+Con este cambio, si `ft_strjoin` falla, `read_buffer` liberar\'e1 `stash`, har\'e1 que `stash` apunte a NULL y devolver\'e1 -1.\
+\
+juanlatregua: y return (bytes) ?\
+\
+GitHub Copilot: La l\'ednea `return (bytes);` en tu funci\'f3n `read_buffer` devuelve el n\'famero de bytes que fueron le\'eddos por la llamada a la funci\'f3n `read`. Esto es \'fatil para saber cu\'e1ntos bytes se han le\'eddo del archivo.\
+\
+Si `read` devuelve -1, significa que hubo un error al leer el archivo. En tu funci\'f3n, ya est\'e1s manejando este caso y devolviendo -1.\
+\
+Si `read` devuelve 0, significa que se ha llegado al final del archivo. En tu funci\'f3n, est\'e1s devolviendo 0 en este caso, lo cual es correcto.\
+\
+Si `read` devuelve un n\'famero positivo, es el n\'famero de bytes que se han le\'eddo con \'e9xito del archivo. En tu funci\'f3n, est\'e1s devolviendo este n\'famero, lo cual es correcto.\
+\
+Por lo tanto, `return (bytes);` es correcto en tu funci\'f3n `read_buffer`.\
+\
+juanlatregua: no devuleve nada entonces\
+\
+GitHub Copilot: La funci\'f3n `read_buffer` devuelve el n\'famero de bytes que se han le\'eddo del archivo. Este es el valor que se devuelve con `return (bytes);`.\
+\
+\
+\
+juanlatregua: static int	read_buffer(int fd, char **stash, char *buffer)\
+\{\
+	char	*tmp;\
+	int		bytes;\
+\
+	ft_bzero(buffer, BUFFER_SIZE + 1);\
+	bytes = read(fd, buffer, BUFFER_SIZE);\
+	if (bytes < 0 || buffer == NULL)\
+	\{\
+		free(*stash);\
+		*stash = NULL;\
+		return (-1);\
+	\}\
+	if (bytes == 0)\
+		return (bytes);\
+	tmp = ft_strjoin(*stash, buffer);\
+	if (tmp == NULL)\
+	\{\
+		free(*stash);\
+		*stash = NULL;\
+		return (-1);\
+	\}\
+	free(*stash);\
+	*stash = tmp;\
+	return (bytes);\
+\}\
+\
+GitHub Copilot: La funci\'f3n `read_buffer` que proporcionaste realiza las siguientes operaciones:\
+\
+1. Limpia el buffer con `ft_bzero`.\
+2. Lee hasta `BUFFER_SIZE` bytes del archivo identificado por `fd` en el buffer.\
+3. Si la lectura falla o si el buffer es NULL, libera la memoria apuntada por `stash`, establece `stash` a NULL y devuelve -1.\
+4. Si no se leyeron bytes (es decir, se ha llegado al final del archivo), devuelve 0.\
+5. Concatena el buffer al final de `stash` usando `ft_strjoin` y almacena el resultado en `tmp`.\
+6. Si `ft_strjoin` falla (es decir, devuelve NULL), libera la memoria apuntada por `stash`, establece `stash` a NULL y devuelve -1.\
+7. Libera la memoria apuntada por `stash`.\
+8. Hace que `stash` apunte a la nueva cadena concatenada.\
+9. Devuelve el n\'famero de bytes que se han le\'eddo del archivo.\
+\
+Por lo tanto, `read_buffer` devuelve el n\'famero de bytes que se han le\'eddo del archivo, o -1 si ocurre un error.\
+\
+juanlatregua: el problema est\'e1 cuando el texto est\'e1 vac\'edo\
+\
+GitHub Copilot: Si el texto est\'e1 vac\'edo, la funci\'f3n `read` devolver\'e1 0, lo que indica que se ha llegado al final del archivo. En tu funci\'f3n `read_buffer`, est\'e1s manejando este caso correctamente y devolviendo 0.\
+\
+Sin embargo, si `stash` apunta a una cadena vac\'eda (es decir, una cadena que solo contiene el car\'e1cter nulo '\\0'), la funci\'f3n `ft_strjoin` intentar\'e1 crear una nueva cadena que es la concatenaci\'f3n de `stash` y `buffer`. Si `buffer` tambi\'e9n est\'e1 vac\'edo, el resultado ser\'e1 una cadena vac\'eda.\
+\
+En este caso, `ft_strjoin` asignar\'e1 memoria para la nueva cadena, incluso si est\'e1 vac\'eda. Esto no es un problema en s\'ed mismo, pero significa que el c\'f3digo que llama a `read_buffer` debe liberar esta memoria en alg\'fan momento, incluso si la cadena est\'e1 vac\'eda.\
+\
+Si el problema es que `read_buffer` devuelve un valor no esperado cuando el texto est\'e1 vac\'edo, podr\'edas modificar la funci\'f3n para devolver un valor espec\'edfico en este caso. Por ejemplo, podr\'edas hacer que devuelva -1 si tanto `stash` como `buffer` est\'e1n vac\'edos:\
+\
+```c\
+if (bytes == 0 && (*stash == NULL || **stash == '\\0'))\
+    return (-1);\
+```\
+\
+Con este cambio, `read_buffer` devolver\'e1 -1 si se ha llegado al final del archivo y `stash` est\'e1 vac\'edo.\
+\
+juanlatregua: en lugar de devolver bytes\
+\
+GitHub Copilot: Si deseas que la funci\'f3n `read_buffer` devuelva un valor distinto de `bytes` cuando el texto est\'e1 vac\'edo, puedes hacerlo comprobando si `bytes` es 0 (lo que indica que se ha llegado al final del archivo) y si `stash` est\'e1 vac\'edo. Aqu\'ed te muestro c\'f3mo podr\'edas hacerlo:\
+\
+```c\
+if (bytes == 0 && (*stash == NULL || **stash == '\\0'))\
+    return (-1); // o cualquier otro valor que desees devolver\
+```\
+\
+Con este cambio, `read_buffer` devolver\'e1 -1 (o cualquier otro valor que elijas) si se ha llegado al final del archivo y `stash` est\'e1 vac\'edo. En todos los dem\'e1s casos, `read_buffer` seguir\'e1 devolviendo `bytes`, que es el n\'famero de bytes que se han le\'eddo del archivo.\
+\
+juanlatregua: mejor aqu\'ed hay que sea menor o igual a 0 \
+\
+GitHub Copilot: \
+\
+juanlatregua: if (bytes < 0 || buffer == NULL)\
+\
+GitHub Copilot: Si quieres cambiar la condici\'f3n para que tambi\'e9n maneje el caso cuando `bytes` es igual a 0, puedes hacerlo de la siguiente manera:\
+\
+```c\
+if (bytes <= 0 || buffer == NULL)\
+```\
+\
+Con este cambio, la funci\'f3n `read_buffer` tambi\'e9n manejar\'e1 el caso cuando `bytes` es 0, lo que indica que se ha llegado al final del archivo. Si `bytes` es 0 o si `buffer` es NULL, la funci\'f3n liberar\'e1 la memoria apuntada por `stash`, establecer\'e1 `stash` a NULL y devolver\'e1 -1.\
+\
+juanlatregua: static int	read_buffer(int fd, char **stash, char *buffer)\
+\{\
+	char	*tmp;\
+	int		bytes;\
+\
+	ft_bzero(buffer, BUFFER_SIZE + 1);\
+	bytes = read(fd, buffer, BUFFER_SIZE);\
+	if (bytes <= 0 || buffer == NULL)\
+	\{\
+		free(*stash);\
+		*stash = NULL;\
+		return (-1);\
+	\}\
+	if (bytes == 0)\
+		return (bytes);\
+	tmp = ft_strjoin(*stash, buffer);\
+	if (tmp == NULL)\
+	\{\
+		free(*stash);\
+		*stash = NULL;\
+		return (-1);\
+	\}\
+	free(*stash);\
+	*stash = tmp;\
+	return (bytes);\
+\} explica \
+\
+GitHub Copilot: La funci\'f3n `read_buffer` realiza las siguientes operaciones:\
+\
+1. Limpia el buffer con `ft_bzero`.\
+\
+2. Lee hasta `BUFFER_SIZE` bytes del archivo identificado por `fd` en el buffer.\
+\
+3. Si la lectura falla, si se ha llegado al final del archivo (es decir, `bytes` es 0), o si el buffer es NULL, libera la memoria apuntada por `stash`, establece `stash` a NULL y devuelve -1.\
+\
+4. Si no se leyeron bytes (es decir, se ha llegado al final del archivo), devuelve 0.\
+\
+5. Concatena el buffer al final de `stash` usando `ft_strjoin` y almacena el resultado en `tmp`.\
+\
+6. Si `ft_strjoin` falla (es decir, devuelve NULL), libera la memoria apuntada por `stash`, establece `stash` a NULL y devuelve -1.\
+\
+7. Libera la memoria apuntada por `stash`.\
+\
+8. Hace que `stash` apunte a la nueva cadena concatenada.\
+\
+9. Devuelve el n\'famero de bytes que se han le\'eddo del archivo.\
+\
+Por lo tanto, `read_buffer` devuelve el n\'famero de bytes que se han le\'eddo del archivo, o -1 si ocurre un error o si se ha llegado al final del archivo.\
+\
+juanlatregua: como uso este main con mi funci\'f3n getnextline\
+\
+GitHub Copilot: Para usar tu funci\'f3n `get_next_line` con un `main`, necesitar\'e1s abrir un archivo, pasar el descriptor de archivo a `get_next_line` en un bucle hasta que ya no haya m\'e1s l\'edneas para leer, y luego cerrar el archivo. Aqu\'ed te muestro c\'f3mo podr\'edas hacerlo:\
+\
+```c\
+#include "get_next_line.h" // Aseg\'farate de incluir el archivo de cabecera para get_next_line\
+\
+int main(void)\
+\{\
+    int fd;\
+    char *line;\
+\
+    fd = open("archivo.txt", O_RDONLY); // Abre el archivo que deseas leer\
+    if (fd == -1)\
+    \{\
+        // Maneja el error\
+        return (1);\
+    \}\
+\
+    while (get_next_line(fd, &line) > 0) // Lee l\'edneas del archivo hasta que ya no haya m\'e1s para leer\
+    \{\
+        // Haz algo con la l\'ednea, por ejemplo, impr\'edmela\
+        printf("%s\\n", line);\
+        free(line); // No olvides liberar la l\'ednea despu\'e9s de usarla\
+    \}\
+\
+    close(fd); // Cierra el archivo\
+\
+    return (0);\
+\}\
+```\
+\
+Este `main` abrir\'e1 un archivo llamado "archivo.txt", leer\'e1 cada l\'ednea del archivo con `get_next_line`, imprimir\'e1 cada l\'ednea y luego liberar\'e1 la memoria asignada a la l\'ednea. Cuando ya no haya m\'e1s l\'edneas para leer, cerrar\'e1 el archivo.\
+\
+Aseg\'farate de reemplazar "archivo.txt" con el nombre del archivo que realmente deseas leer. Adem\'e1s, si `get_next_line` devuelve -1, deber\'edas manejar este error de alguna manera. En el ejemplo anterior, simplemente he ignorado este caso por simplicidad.\
+\
+juanlatregua: lo compilo con mi funci\'f3n\
+\
+GitHub Copilot: Para compilar tu programa con tu funci\'f3n `get_next_line`, necesitar\'e1s incluir todos los archivos fuente en la l\'ednea de comandos del compilador. Suponiendo que tu funci\'f3n `get_next_line` est\'e1 en un archivo llamado `get_next_line.c`, y tu funci\'f3n `main` est\'e1 en un archivo llamado `main.c`, podr\'edas compilar tu programa de la siguiente manera:\
+\
+```bash\
+gcc -Wall -Wextra -Werror get_next_line.c main.c -o my_program\
+```\
+\
+Este comando compilar\'e1 `get_next_line.c` y `main.c` en un ejecutable llamado `my_program`. Las opciones `-Wall -Wextra -Werror` le dicen al compilador que muestre todos los warnings (`-Wall -Wextra`) y que trate los warnings como errores (`-Werror`).\
+\
+Despu\'e9s de ejecutar este comando, puedes ejecutar tu programa con `./my_program`.\
+\
+Si tu funci\'f3n `get_next_line` depende de otras funciones que est\'e1n en otros archivos, tambi\'e9n necesitar\'e1s incluir esos archivos en la l\'ednea de comandos del compilador. Por ejemplo, si tienes una funci\'f3n `ft_strjoin` en un archivo llamado `ft_strjoin.c`, necesitar\'edas compilar tu programa de la siguiente manera:\
+\
+```bash\
+gcc -Wall -Wextra -Werror get_next_line.c ft_strjoin.c main.c -o my_program\
+```\
+\
+juanlatregua: get_next_line git:(master) 
+\f1 \uc0\u10007 
+\f0  gcc -Wall -Wextra -Werror get_next_line.c main.c\
+\
+Undefined symbols for architecture x86_64:\
+  "_ft_bzero", referenced from:\
+      _read_buffer in get_next_line-0fdcc7.o\
+  "_ft_strchr", referenced from:\
+      _get_next_line in get_next_line-0fdcc7.o\
+      _get_result in get_next_line-0fdcc7.o\
+      _remove_result in get_next_line-0fdcc7.o\
+  "_ft_strjoin", referenced from:\
+      _read_buffer in get_next_line-0fdcc7.o\
+  "_ft_strlen", referenced from:\
+      _get_next_line in get_next_line-0fdcc7.o\
+      _get_result in get_next_line-0fdcc7.o\
+      _remove_result in get_next_line-0fdcc7.o\
+ld: symbol(s) not found for architecture x86_64\
+clang: error: linker command failed with exit code 1 (use -v to see invocation)\
+\
+GitHub Copilot: El error que est\'e1s viendo indica que el enlazador no puede encontrar las funciones `ft_bzero`, `ft_strchr`, `ft_strjoin` y `ft_strlen`. Estas funciones son parte de la biblioteca `libft` que se usa com\'fanmente en los proyectos de la escuela 42.\
+\
+Necesitas compilar estos archivos y enlazarlos en tu programa. Si tienes estos archivos en tu directorio, puedes agregarlos a la l\'ednea de comando del compilador. Por ejemplo:\
+\
+```bash\
+gcc -Wall -Wextra -Werror get_next_line.c main.c ft_bzero.c ft_strchr.c ft_strjoin.c ft_strlen.c -o my_program\
+```\
+\
+Si tienes muchos archivos en `libft`, puede ser m\'e1s f\'e1cil compilar la biblioteca `libft` en un archivo de archivo (`.a`) y luego enlazar ese archivo de archivo en tu programa. Aqu\'ed te muestro c\'f3mo podr\'edas hacerlo:\
+\
+```bash\
+gcc -c -Wall -Wextra -Werror ft_bzero.c ft_strchr.c ft_strjoin.c ft_strlen.c\
+ar rcs libft.a ft_bzero.o ft_strchr.o ft_strjoin.o ft_strlen.o\
+gcc -Wall -Wextra -Werror get_next_line.c main.c -L. -lft -o my_program\
+```\
+\
+El primer comando compila los archivos fuente en archivos de objeto (`.o`). El segundo comando crea un archivo de archivo `libft.a` que contiene los archivos de objeto. El tercer comando compila `get_next_line.c` y `main.c`, y enlaza el archivo de archivo `libft.a` en el programa. La opci\'f3n `-L.` le dice al enlazador que busque archivos de archivo en el directorio actual, y la opci\'f3n `-lft` le dice al enlazador que enlace el archivo de archivo `libft.a`.\
+\
+juanlatregua: si quiero pasarle un texto a mi funci\'f3n como lo indico en el main int	main(int argc, char **argv)\
+\{\
+	int		fd;\
+	char	*line;\
+	int		counter;\
+\
+	counter = 0;\
+	line = 0;\
+	if (argc != 2)\
+	\{\
+		printf("No files add <file>\\n");\
+		return (1);\
+	\}\
+	fd = open(argv[1], O_RDONLY);\
+	if (fd == -1)\
+	\{\
+		printf("error opening file\\n");\
+		return (1);\
+	\}\
+	line = get_next_line(fd);\
+	printf("the string read is \\"%s\\" \\n", line);\
+	line = get_next_line(fd);\
+	printf("the string read is \\"%s\\" \\n", line);\
+	line = get_next_line(fd);\
+	printf("the string read is\\"%s\\" \\n", line);\
+	\
+	close(fd);\
+	free(line);\
+	return (0);\
+\} lo compilo con los demar archivos\
+\
+GitHub Copilot: Si quieres pasar un archivo de texto a tu programa, puedes hacerlo a trav\'e9s de la l\'ednea de comandos cuando ejecutas tu programa. El nombre del archivo se pasar\'e1 a tu programa como un argumento de l\'ednea de comandos, y puedes acceder a \'e9l a trav\'e9s del par\'e1metro `argv` de tu funci\'f3n `main`.\
+\
+Por ejemplo, si tienes un archivo de texto llamado `texto.txt` que quieres pasar a tu programa, puedes hacerlo de la siguiente manera:\
+\
+```bash\
+./my_program texto.txt\
+```\
+\
+En tu funci\'f3n `main`, `argv[1]` ser\'e1 una cadena que contiene el nombre del archivo que pasaste en la l\'ednea de comandos (`"texto.txt"` en este caso). Luego puedes abrir este archivo con la funci\'f3n `open` y pasar el descriptor de archivo devuelto a tu funci\'f3n `get_next_line`.\
+\
+Tu c\'f3digo ya est\'e1 configurado para hacer esto. Si `argc` no es 2 (lo que significa que no se pas\'f3 exactamente un argumento de l\'ednea de comandos), tu programa imprimir\'e1 un mensaje de error y terminar\'e1. Si se pas\'f3 un argumento de l\'ednea de comandos, tu programa intentar\'e1 abrir el archivo cuyo nombre es `argv[1]`.\
+\
+Para compilar tu programa con todos los archivos necesarios, puedes usar un comando similar al que mencion\'e9 en mi respuesta anterior. Por ejemplo:\
+\
+```bash\
+gcc -Wall -Wextra -Werror get_next_line.c main.c ft_bzero.c ft_strchr.c ft_strjoin.c ft_strlen.c -o my_program\
+```\
+\
+Luego puedes ejecutar tu programa con el nombre del archivo de texto que quieres leer como argumento de l\'ednea de comandos:\
+\
+```bash\
+./my_program texto.txt\
+```\
+\
+juanlatregua: puedes reconfigura mi main\
+\
+GitHub Copilot: \
+\
+juanlatregua: #include "get_next_line.h"\
+#include <stdio.h>\
+#include <fcntl.h>\
+\
+int	main(int argc, char **argv)\
+\{\
+	int		fd;\
+	char	*line;\
+	int		counter;\
+\
+	counter = 0;\
+	line = 0;\
+	if (argc != 2)\
+	\{\
+		printf("No files add <file>\\n");\
+		return (1);\
+	\}\
+	fd = open(argv[1], O_RDONLY);\
+	if (fd == -1)\
+	\{\
+		printf("error opening file\\n");\
+		return (1);\
+	\}\
+	line = get_next_line(fd);\
+	printf("the string read is \\"%s\\" \\n", line);\
+	line = get_next_line(fd);\
+	printf("the string read is \\"%s\\" \\n", line);\
+	line = get_next_line(fd);\
+	printf("the string read is\\"%s\\" \\n", line);\
+	\
+	close(fd);\
+	free(line);\
+	return (0);\
+\}\
+\
+GitHub Copilot: Tu funci\'f3n `main` ya est\'e1 bien configurada para leer un archivo y usar la funci\'f3n `get_next_line` para imprimir las l\'edneas del archivo. Sin embargo, si quieres leer e imprimir todas las l\'edneas del archivo, puedes hacerlo con un bucle `while`. Aqu\'ed te muestro c\'f3mo podr\'edas hacerlo:\
+\
+```c\
+#include "get_next_line.h"\
+#include <stdio.h>\
+#include <fcntl.h>\
+\
+int	main(int argc, char **argv)\
+\{\
+	int		fd;\
+	char	*line;\
+\
+	if (argc != 2)\
+	\{\
+		printf("No files add <file>\\n");\
+		return (1);\
+	\}\
+	fd = open(argv[1], O_RDONLY);\
+	if (fd == -1)\
+	\{\
+		printf("error opening file\\n");\
+		return (1);\
+	\}\
+	while ((line = get_next_line(fd)) != NULL)\
+	\{\
+		printf("the string read is \\"%s\\" \\n", line);\
+		free(line);\
+	\}\
+	\
+	close(fd);\
+	return (0);\
+\}\
+```\
+\
+Este c\'f3digo leer\'e1 e imprimir\'e1 todas las l\'edneas del archivo hasta que `get_next_line` devuelva `NULL`, lo que indica que no hay m\'e1s l\'edneas para leer. Tambi\'e9n libera la memoria asignada a cada l\'ednea despu\'e9s de imprimir la l\'ednea, para evitar fugas de memoria.\
+\
+juanlatregua: explica mi main\
+\
+GitHub Copilot: Tu funci\'f3n `main` realiza las siguientes operaciones:\
+\
+1. Comprueba si se ha pasado exactamente un argumento de l\'ednea de comandos al programa (adem\'e1s del nombre del programa). Si no es as\'ed, imprime un mensaje de error y termina el programa.\
+\
+2. Intenta abrir el archivo cuyo nombre se pas\'f3 como argumento de l\'ednea de comandos. Si no puede abrir el archivo (por ejemplo, porque el archivo no existe o porque no tienes permiso para leerlo), imprime un mensaje de error y termina el programa.\
+\
+3. Entra en un bucle que contin\'faa hasta que `get_next_line` devuelva `NULL`. En cada iteraci\'f3n del bucle, llama a `get_next_line` para leer la siguiente l\'ednea del archivo, imprime la l\'ednea y luego libera la memoria asignada a la l\'ednea.\
+\
+4. Despu\'e9s de que se han le\'eddo todas las l\'edneas del archivo, cierra el archivo y termina el programa.\
+\
+Por lo tanto, tu programa lee e imprime todas las l\'edneas de un archivo cuyo nombre se pasa como argumento de l\'ednea de comandos. Si ocurre alg\'fan error (como no pasar un argumento de l\'ednea de comandos o no poder abrir el archivo), tu programa imprime un mensaje de error y termina.\
+\
+juanlatregua: por qu\'e9 argc !=2\
+\
+GitHub Copilot: El `argc` en la funci\'f3n `main` representa el n\'famero de argumentos de l\'ednea de comandos pasados al programa. Siempre es al menos 1, porque el primer argumento (`argv[0]`) es siempre el nombre del programa.\
+\
+Por lo tanto, si `argc` es diferente de 2, significa que el n\'famero de argumentos pasados al programa es incorrecto. Si `argc` es 1, significa que no se pas\'f3 ning\'fan argumento adicional al programa. Si `argc` es mayor que 2, significa que se pasaron demasiados argumentos al programa.\
+\
+En tu programa, esperas exactamente un argumento adicional: el nombre del archivo que se va a leer. Por lo tanto, si `argc` no es 2, imprimes un mensaje de error y terminas el programa, porque no puedes continuar sin el nombre del archivo.\
+\
+juanlatregua: si es distinto de 2 quiere decir que se le ha paso un fichero a leer ?\
+\
+GitHub Copilot: No, si `argc` es distinto de 2, significa que no se ha pasado exactamente un argumento adicional al programa. \
+\
+En el contexto de tu programa, esperas que `argc` sea 2 porque el primer argumento (`argv[0]`) es siempre el nombre del programa y el segundo argumento (`argv[1]`) deber\'eda ser el nombre del archivo que quieres leer.\
+\
+Por lo tanto:\
+\
+- Si `argc` es 1, significa que no se ha pasado ning\'fan argumento adicional al programa, es decir, no se ha proporcionado ning\'fan archivo para leer.\
+- Si `argc` es mayor que 2, significa que se han pasado demasiados argumentos al programa, es decir, se han proporcionado m\'e1s de un archivo para leer.\
+\
+En ambos casos, tu programa imprime un mensaje de error y termina, porque espera exactamente un archivo para leer.\
+\
+juanlatregua: explica char	*get_next_line(int fd)\
+\{\
+	static char	*stash;\
+	char		*result;\
+	char		*buffer;\
+	int			bytes;\
+\
+	if (fd < 0 || BUFFER_SIZE <= 0)\
+		return (NULL);\
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));\
+	bytes = 1;\
+	while (ft_strchr(stash, '\\n') == NULL\
+		&& bytes > 0)\
+		bytes = read_buffer(fd, &stash, buffer);\
+	free(buffer);\
+	if (bytes == -1)\
+		return (NULL);\
+	if (ft_strlen(stash) == 0)\
+		return (NULL);\
+	get_result(&stash, &result);\
+	remove_result(&stash);\
+	return (result);\
+\}\
+\
+GitHub Copilot: La funci\'f3n `get_next_line` lee una l\'ednea de un archivo y devuelve esa l\'ednea como una cadena. Aqu\'ed est\'e1 lo que hace cada parte de la funci\'f3n:\
+\
+1. Declara varias variables: `stash` para almacenar cualquier texto que se haya le\'eddo pero que a\'fan no se haya devuelto, `result` para almacenar la l\'ednea que se va a devolver, `buffer` para almacenar el texto que se lee del archivo, y `bytes` para almacenar el n\'famero de bytes le\'eddos en cada llamada a `read`.\
+\
+2. Comprueba si el descriptor de archivo `fd` es v\'e1lido y si `BUFFER_SIZE` es mayor que 0. Si no es as\'ed, devuelve `NULL`.\
+\
+3. Asigna memoria para `buffer` con un tama\'f1o de `BUFFER_SIZE + 1`.\
+\
+4. Entra en un bucle que contin\'faa hasta que se encuentra un car\'e1cter de nueva l\'ednea (`'\\n'`) en `stash` o hasta que no se pueden leer m\'e1s bytes del archivo. Dentro del bucle, llama a `read_buffer` para leer m\'e1s texto del archivo en `stash`.\
+\
+5. Libera la memoria asignada a `buffer`.\
+\
+6. Comprueba si hubo un error al leer el archivo (si `bytes` es -1) o si `stash` est\'e1 vac\'edo. Si es as\'ed, devuelve `NULL`.\
+\
+7. Llama a `get_result` para copiar la pr\'f3xima l\'ednea de `stash` en `result`.\
+\
+8. Llama a `remove_result` para eliminar la l\'ednea que se acaba de copiar a `result` de `stash`.\
+\
+9. Devuelve `result`, que es la pr\'f3xima l\'ednea del archivo.\
+\
+Por lo tanto, cada vez que llamas a `get_next_line`, lee el siguiente trozo de texto del archivo (si es necesario), encuentra la pr\'f3xima l\'ednea en el texto que ha le\'eddo hasta ahora, y devuelve esa l\'ednea.\
+\
+juanlatregua: por qu\'e9 es static char *stash\
+\
+GitHub Copilot: La palabra clave `static` en C se utiliza para indicar que una variable debe mantener su valor entre las llamadas a la funci\'f3n. En otras palabras, la variable no se destruye y se recrea cada vez que se llama a la funci\'f3n; en su lugar, se crea la primera vez que se llama a la funci\'f3n y luego mantiene su valor para las llamadas futuras.\
+\
+En el caso de `static char *stash` en tu funci\'f3n `get_next_line`, esto significa que `stash` mantiene cualquier texto que se haya le\'eddo del archivo pero que a\'fan no se haya devuelto como una l\'ednea. Esto es \'fatil porque `get_next_line` puede leer m\'e1s texto del archivo del que necesita para devolver la pr\'f3xima l\'ednea, y necesitas alg\'fan lugar para almacenar el texto extra para que puedas devolverlo en las llamadas futuras a `get_next_line`.\
+\
+Por ejemplo, si tu archivo contiene "Hello\\nWorld\\n" y tu `BUFFER_SIZE` es 10, la primera llamada a `read` leer\'e1 todo el texto del archivo. Pero la primera llamada a `get_next_line` solo debe devolver "Hello". As\'ed que necesitas almacenar "World\\n" en alg\'fan lugar para que puedas devolverlo en la pr\'f3xima llamada a `get_next_line`. Eso es lo que `stash` est\'e1 haciendo aqu\'ed.\
+\
+juanlatregua: y si el texto continua que ha la funci\'f3n\
+\
+GitHub Copilot: Si el texto contin\'faa despu\'e9s de la l\'ednea que se acaba de devolver, la funci\'f3n `get_next_line` guardar\'e1 el resto del texto en la variable `stash` para su uso en las siguientes llamadas.\
+\
+Cuando se llama a `get_next_line` de nuevo, primero revisar\'e1 `stash` para ver si contiene alguna l\'ednea que a\'fan no se haya devuelto. Si es as\'ed, devolver\'e1 esa l\'ednea y eliminar\'e1 esa l\'ednea de `stash`.\
+\
+Si `stash` no contiene una l\'ednea completa (es decir, no contiene un car\'e1cter de nueva l\'ednea), `get_next_line` leer\'e1 m\'e1s texto del archivo y lo agregar\'e1 a `stash`, y luego buscar\'e1 la pr\'f3xima l\'ednea en `stash`.\
+\
+Por lo tanto, `get_next_line` siempre devolver\'e1 la pr\'f3xima l\'ednea del archivo en cada llamada, independientemente de cu\'e1nto texto se haya le\'eddo del archivo en las llamadas anteriores. Y siempre guardar\'e1 cualquier texto que se haya le\'eddo pero que a\'fan no se haya devuelto en `stash`, para que pueda devolverlo en las llamadas futuras.\
+\
+juanlatregua: necesito un explicaci\'f3n m\'e1s en detalles de cada llamada cada funci\'f3n y variables char	*get_next_line(int fd)\
+\{\
+	static char	*stash;\
+	char		*result;\
+	char		*buffer;\
+	int			bytes;\
+\
+	if (fd < 0 || BUFFER_SIZE <= 0)\
+		return (NULL);\
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));\
+	bytes = 1;\
+	while (ft_strchr(stash, '\\n') == NULL && bytes > 0)\
+		bytes = read_buffer(fd, &stash, buffer);\
+	free(buffer);\
+	if (bytes == -1)\
+		return (NULL);\
+	if (ft_strlen(stash) == 0)\
+		return (NULL);\
+	get_result(&stash, &result);\
+	remove_result(&stash);\
+	return (result);\
+\}\
+\
+GitHub Copilot: Claro, aqu\'ed tienes una explicaci\'f3n m\'e1s detallada de cada l\'ednea de la funci\'f3n `get_next_line`:\
+\
+1. `static char *stash;`: `stash` es una variable est\'e1tica que mantiene su valor entre las llamadas a la funci\'f3n. Se utiliza para almacenar cualquier texto que se haya le\'eddo del archivo pero que a\'fan no se haya devuelto como una l\'ednea.\
+\
+2. `char *result;`: `result` es una variable que se utilizar\'e1 para almacenar la l\'ednea que se va a devolver.\
+\
+3. `char *buffer;`: `buffer` es una variable que se utilizar\'e1 para almacenar el texto que se lee del archivo.\
+\
+4. `int bytes;`: `bytes` es una variable que se utilizar\'e1 para almacenar el n\'famero de bytes le\'eddos en cada llamada a `read`.\
+\
+5. `if (fd < 0 || BUFFER_SIZE <= 0) return (NULL);`: Esta l\'ednea comprueba si el descriptor de archivo `fd` es v\'e1lido y si `BUFFER_SIZE` es mayor que 0. Si no es as\'ed, la funci\'f3n devuelve `NULL`.\
+\
+6. `buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));`: Esta l\'ednea asigna memoria para `buffer` con un tama\'f1o de `BUFFER_SIZE + 1`.\
+\
+7. `bytes = 1;`: Esta l\'ednea inicializa `bytes` a 1 para que el bucle `while` se ejecute al menos una vez.\
+\
+8. `while (ft_strchr(stash, '\\n') == NULL && bytes > 0) bytes = read_buffer(fd, &stash, buffer);`: Este bucle contin\'faa hasta que se encuentra un car\'e1cter de nueva l\'ednea (`'\\n'`) en `stash` o hasta que no se pueden leer m\'e1s bytes del archivo. Dentro del bucle, llama a `read_buffer` para leer m\'e1s texto del archivo en `stash`.\
+\
+9. `free(buffer);`: Esta l\'ednea libera la memoria asignada a `buffer`.\
+\
+10. `if (bytes == -1) return (NULL);`: Esta l\'ednea comprueba si hubo un error al leer el archivo (si `bytes` es -1). Si es as\'ed, la funci\'f3n devuelve `NULL`.\
+\
+11. `if (ft_strlen(stash) == 0) return (NULL);`: Esta l\'ednea comprueba si `stash` est\'e1 vac\'edo. Si es as\'ed, la funci\'f3n devuelve `NULL`.\
+\
+12. `get_result(&stash, &result);`: Esta l\'ednea llama a `get_result` para copiar la pr\'f3xima l\'ednea de `stash` en `result`.\
+\
+13. `remove_result(&stash);`: Esta l\'ednea llama a `remove_result` para eliminar la l\'ednea que se acaba de copiar a `result` de `stash`.\
+\
+14. `return (result);`: Finalmente, esta l\'ednea devuelve `result`, que es la pr\'f3xima l\'ednea del archivo.}

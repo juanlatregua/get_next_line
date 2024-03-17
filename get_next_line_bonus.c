@@ -6,7 +6,7 @@
 /*   By: jsilva-m <jsilva-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 18:47:44 by jsilva-m          #+#    #+#             */
-/*   Updated: 2024/03/15 19:08:21 by jsilva-m         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:48:02 by jsilva-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	get_result(char **stash, char **result)
 //	 MAX_FILES_OPENED is the locked-in-memory size
 //	 obtained through the command "ulimit -a"*/
 
-char	*get_next_line(int fd)
+char	*get_next_line_bonus(int fd)
 {
     static char	*stash[MAX_FILES_OPENED];
 	char		*result;

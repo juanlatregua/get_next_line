@@ -6,7 +6,7 @@
 /*   By: jsilva-m <jsilva-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 18:47:14 by jsilva-m          #+#    #+#             */
-/*   Updated: 2024/03/15 19:27:55 by jsilva-m         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:50:48 by jsilva-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #  define BUFFER_SIZE 42
 # endif
 
-char	*get_next_line(int fd);
+char	*get_next_line_bonus(int fd);
 
 void	ft_bzero(void *s, size_t n);
 size_t	ft_strlen(const char *str);

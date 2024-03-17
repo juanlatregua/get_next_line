@@ -1,0 +1,5 @@
+La parte bonus solo será evaluada si la parte obligatoria está
+PERFECTA. Perfecta significa que se ha completado en su totalidad
+y funciona perfectamente, sin ningún fallo. Si no has completado
+TODOS los requisitos de la parte obligatoria, tu parte bonus no será
+evaluada de ninguna manera.
